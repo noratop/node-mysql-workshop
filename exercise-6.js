@@ -46,23 +46,18 @@ connection.queryAsync("SELECT id,email FROM Account LIMIT 10").then(function(acc
             accountArray.push(accountData);
         })
         
-        return accountArray;
-    });
-}).then(function(accountArray){
-    //console.log(accountArray);
+        var table = new Table();        
 
-    var table = new Table();        
-
-    table.push(['Account Id','Account Email','AddressBooks']);
-
-    accountArray.forEach(function(elt){
-        //console.log(elt);
-        var id = "#"+elt.accountId+":";
-        table.push([id.bold,elt.accountEmail.red,elt.addressBooks.rainbow]);
-    });
+        table.push(['Account Id','Account Email','AddressBooks']);
     
-    console.log(table.toString());
+        accountArray.forEach(function(elt){
+            //console.log(elt);
+            var id = "#"+elt.accountId+":";
+            table.push([id.bold,elt.accountEmail.red,elt.addressBooks.rainbow]);
+        });
         
+        console.log(table.toString());;
+    });
 }).finally(function() {
     connection.end();
 }).catch(function(e){
